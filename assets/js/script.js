@@ -20,15 +20,19 @@ var scheduleTime = [
 
 var row = $(".row");
 
+
 scheduleTime.forEach(function(time, index){
     var col = $("<div>").addClass("col-12").attr("id", index);
-    var div = $("<div>").addClass(time);
+    var divTime = $("<div>").addClass(time);
+    divTime.addClass("hour");
     var input = $("<input>").addClass("user-input");
-    var save = $("<div>").addClass("save");
-    col.append(div);
-    div.text(time);
+    var save = $("<div>").addClass("saveBtn");
+    // appending the time element of the column and giving it 'time' as text
+    col.append(divTime);
+    divTime.text(time);
+    // appending the input element of the column
     col.append(input);
-
+    // appending the save button element of the column
     col.append(save);
     save.text("Click here to save");
     row.append(col)
