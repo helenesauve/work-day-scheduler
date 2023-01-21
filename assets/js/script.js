@@ -6,6 +6,7 @@ $("#currentDay").text(now.format("Do MMMM YYYY"));
 
 var schedule = $(".container");
 
+
 var scheduleTime = [
     "9am",
     "10am",
@@ -36,15 +37,30 @@ scheduleTime.forEach(function(time, index){
     col.append(save);
     save.text("Click here to save");
     row.append(col)
+
+    //change colour depending on time of day
+    for (var i = 0; i < scheduleTime.length; i++) {
+        if (scheduleTime[i].isBefore(now)) {
+            input.addClass("past");
+        }
+        else if (scheduleTime[i].isAfter(now)){
+            input.addClass("future")
+        }
+        else {
+            input.addClass("present");
+        }
     
-}
+    }
+}   
 )
 
+// create variable with something in rows where time is?
+// create variable with something in rows where input is
 
 
-var rowHour = moment().hour(9) // starts calendar at 9:00
 
-schedule.append(rowHour)
+// function to dynamically update colours
+
  
  
  

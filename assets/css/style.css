@@ -36,9 +36,11 @@ textarea {
   border-top: 1px solid white;
 }
 
-.col-12 {
+.input
+
+/* .col-12 {
   display: flex;
-}
+} */
 
 .hour {
   background-color: #ffffff;
