@@ -1,75 +1,77 @@
-// Display current day
-
 var now = moment();
 $("#currentDay").text(now.format("Do MMMM YYYY"));
 
-
+//setting the current time
+var time = now.hour();
+// styling the container
 var schedule = $(".container");
+schedule.addClass("time-block");
 
+//styling the time column in each row
+var columnTime = $(".time");
+columnTime.addClass("hour");
 
-var scheduleTime = [
-    "9am",
-    "10am",
-    "11am",
-    "12pm",
-    "1pm",
-    "2pm",
-    "3pm",
-    "4pm",
-    "5pm"
-]
+//styling each row
+var row = $(".myrow");
+row.addClass("row");
 
-var row = $(".row");
+//styling the save button
+var saveButton = $(".save_btn");
+saveButton.addClass("saveBtn");
 
+var inputArea = $(".input-cont");
 
-scheduleTime.forEach(function(time, index){
-    var col = $("<div>").addClass("col-12").attr("id", index);
-    var divTime = $("<div>").addClass(time);
-    divTime.addClass("hour");
-    var input = $("<input>").addClass("user-input");
-    var save = $("<div>").addClass("saveBtn");
-    // appending the time element of the column and giving it 'time' as text
-    col.append(divTime);
-    divTime.text(time);
-    // appending the input element of the column
-    col.append(input);
-    // appending the save button element of the column
-    col.append(save);
-    save.text("Click here to save");
-    row.append(col)
+//change colour depending on time of day
 
-    //change colour depending on time of day
-    for (var i = 0; i < scheduleTime.length; i++) {
-        if (scheduleTime[i].isBefore(now)) {
-            input.addClass("past");
-        }
-        else if (scheduleTime[i].isAfter(now)){
-            input.addClass("future")
-        }
-        else {
-            input.addClass("present");
-        }
-    
+var id9 = $("#9");
+var id10 = $("#10");
+var id11 = $("#11");
+var id12 = $("#12");
+var id13 = $("#13");
+var id14 = $("#14");
+var id15 = $("#15");
+var id16 = $("#16");
+var id17 = $("#17");
+
+var timeArray = [
+  (id9 = 9),
+  (id10 = 10),
+  (id11 = 11),
+  (id12 = 12),
+  (id13 = 13),
+  (id14 = 14),
+  (id15 = 15),
+  (id16 = 16),
+  (id17 = 17),
+];
+
+// finds the attribute id for each div and assigns a colour to each input based on current time
+schedule.children("div").each(function() {
+    console.log(this)
+    console.log(this.children[0].getAttribute("id"), time)
+    var key = this.children[0].getAttribute("id")
+    var storage = localStorage.getItem(key)
+    if(storage != null){
+        this.children[1].value = storage
+    }   
+    if(this.children[0].getAttribute("id") < time){
+        this.children[1].classList.add("past")
     }
-}   
+    else if(this.children[0].getAttribute("id") == time){
+        this.children[1].classList.add("present")
+    } else{
+        this.children[1].classList.add("future")
+    }
+}
 )
 
-// create variable with something in rows where time is?
-// create variable with something in rows where input is
+//save input in local storage and save it after refresh
 
+saveButton.on("click", function (event) {
+  event.preventDefault();
+  console.log(event.target)
+  console.log(this.previousElementSibling.value)
+  var key = this.previousElementSibling.previousElementSibling.getAttribute("id")
+  localStorage.setItem(key, this.previousElementSibling.value);
+});
 
-
-// function to dynamically update colours
-
- 
- 
- 
-// Color-code each timeblock based on past, present, and future when the timeblock is viewed.
-
-// Allow a user to enter an event when they click a timeblock
-// event listener, allow input
-    // lesson 1, 5 & 6
-
-// store user input in local storage
-
-// Persist events between refreshes of a page
